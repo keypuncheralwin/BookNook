@@ -9,6 +9,8 @@ import random
 
 class Command(BaseCommand):
 
+    help = 'generate dummy data for testing purposes'
+
     def handle(self, *args, **kwargs):
         # generating authors
 
@@ -32,11 +34,11 @@ class Command(BaseCommand):
 
         book_title_list = ["Whispers of the Silent Ocean", "The Last Clockmaker's Dream", "Through the Emerald Gateway",
                            "Chronicles of the Forgotten Kingdom", "The Enchanted Tapestry"]
-        publishers = [x.name for x in Publisher.objects.all]
+        publishers = [x.name for x in Publisher.objects.all()]
         items = zip(book_title_list, publishers)
 
         for item in items:
-            author = Author.objects.order('?')[0]
+            author = Author.objects.order_by('?').first()
             publisher = Publisher.objects.get(name=item[1])
             BookTitle.objects.create(
                 title=item[0], publisher=publisher, author=author)
