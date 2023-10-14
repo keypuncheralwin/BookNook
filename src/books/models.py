@@ -2,6 +2,7 @@ from django.db import models
 from publishers.models import Publisher
 from authors.models import Author
 from django.utils.text import slugify
+from django.urls import reverse
 import uuid
 from django.core.files import File
 import qrcode
@@ -20,6 +21,13 @@ class BookTitle(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    @property
+    def books(self):
+        return self.book_set.all()
+
+    def get_absolute_url(self):
+        return reverse('books:detail', kwargs={'pk': self.pk})
+
     def __str__(self) -> str:
         return f"Book position: {self.title}"
 
@@ -30,7 +38,8 @@ class BookTitle(models.Model):
 
 
 class Book(models.Model):
-    title = models.ForeignKey(BookTitle, on_delete=models.CASCADE)
+    title = models.ForeignKey(
+        BookTitle, on_delete=models.CASCADE)
     isbn = models.CharField(max_length=24, blank=True)
     qr_code = models.ImageField(upload_to='qr_codes', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)

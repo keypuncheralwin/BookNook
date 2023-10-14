@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from customers.models import Customer
 
 
 def home_view(request):
-    value = 'test value'
-    return render(request, 'main.html', {'test_value': value})
+    qs = Customer.objects.all()
+    return render(request, 'main.html', {'qs': qs})

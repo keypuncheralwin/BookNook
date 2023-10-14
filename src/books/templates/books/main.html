@@ -1,0 +1,9 @@
+{% block title %}Book Title List{% endblock %} {% block content %} {% if qs %}
+<ul>
+  {% for el in qs %}
+  <li>{{ el.title }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No books available.</p>
+{% endif %} {% endblock %}
