@@ -9,7 +9,7 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     username = models.CharField(max_length=100, blank=True, unique=True)
-    additonal_info = models.TextField(blank=True)
+    additional_info = models.TextField(blank=True)
     rating = models.PositiveSmallIntegerField(default=50)
     books = models.ManyToManyField(
         Book, blank=True, help_text='books that are currently rented')

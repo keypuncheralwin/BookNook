@@ -8,7 +8,7 @@ from django.core.files import File
 import qrcode
 from io import BytesIO
 from PIL import Image
-
+from rentals.choices import STATUS_CHOICES
 
 # Create your models here.
 
@@ -47,6 +47,13 @@ class Book(models.Model):
 
     def __str__(self) -> str:
         return str(self.title)
+
+    @property
+    def status(self):
+        if len(self.rental_set.all()) > 0:
+            statuses = dict(STATUS_CHOICES)
+            return statuses[self.rental_set.first().status]
+        return False
 
     def save(self, *args, **kwargs):
         if not self.isbn:
