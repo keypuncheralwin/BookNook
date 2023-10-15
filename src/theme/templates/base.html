@@ -1,6 +1,7 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      class="{% if request.session.is_dark_mode %}dark{% endif %} ">
   <head>
     <title>Django Tailwind |
       {% block title %}
@@ -15,10 +16,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     {% tailwind_css %}
   </head>
-  <body class="bg-gray-50">
+  <body class="bg-gray-50 dark:bg-slate-800 dark:text-white">
     <div class="grid grid-cols-12">
       <div class="col-span-12">
         <div class="pt-20 px-6">
+          <a href="{% url 'change' %}">Change Theme</a>
           {% block content %}
           {% endblock content %}
         </div>
