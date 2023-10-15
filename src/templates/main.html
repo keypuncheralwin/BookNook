@@ -1,44 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book Nook</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f8f8f8;
-        color: #333;
-        padding: 20px;
-        text-align: center;
-      }
-      h1 {
-        color: #0066cc;
-      }
-      p {
-        max-width: 600px;
-        margin: 20px auto;
-        font-size: 18px;
-        line-height: 1.6;
-      }
-      ul {
-        list-style-type: none;
-        padding: 0;
-      }
-      li {
-        margin-bottom: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Welcome to Book Nook</h1>
-    <p>A book checkout system made in Django for a local street library.</p>
+{% extends 'base.html' %}
+{% block title %}
+  home
+{% endblock title %}
+{% block content %}
+  {{ obj.title }}
+  <br>
+  {% if qs %}
     <ul>
-      {% if qs %} {% for obj in qs %}
-      <li>{{ obj.first_name }}, {{ obj.last_name }}, {{ obj.username }}</li>
-      {% endfor %} {% else %}
-      <li>No customers in the database.</li>
-      {% endif %}
+      {% for obj in qs %}<li>{{ obj.first_name }}, {{ obj.last_name }}  ({{ obj.username }})</li>{% endfor %}
     </ul>
-  </body>
-</html>
+  {% else %}
+    no customers in the db
+  {% endif %}
+{% endblock content %}
