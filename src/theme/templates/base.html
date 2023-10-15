@@ -14,13 +14,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- font awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
     {% tailwind_css %}
   </head>
   <body class="bg-gray-50 dark:bg-slate-800 dark:text-white">
+    {% include 'layout/navbar.html' %}
     <div class="grid grid-cols-12">
-      <div class="col-span-12">
+      <div class="grid grid-cols-1">{% include 'layout/sidebar.html' %}</div>
+      <div class="col-span-11">
         <div class="pt-20 px-6">
-          <a href="{% url 'change' %}">Change Theme</a>
+          <a class="fixed top-[150px] right-0 p-3 rounded-l-lg bg-slate-200 hover:bg-slate-300 dark:bg-yellow-200 dark:hover:bg-yellow-300 text-slate-900 drop-shadow-sm transition-all"
+             href="{% url 'change' %}">
+            <i class="fa-solid {% if request.session.is_dark_mode %}fa-sun{% else %}fa-moon{% endif %}"></i>
+          </a>
           {% block content %}
           {% endblock content %}
         </div>
