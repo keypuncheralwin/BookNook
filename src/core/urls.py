@@ -23,7 +23,7 @@ from . views import change_theme, home_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view),
+    path('', home_view, name='home'),
     path('theme/', change_theme, name='change'),
     path('books/', include('books.urls', namespace='books')),
     path("__reload__/", include("django_browser_reload.urls")),
