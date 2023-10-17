@@ -24,9 +24,12 @@ class BookTitleListView(FormView, ListView):
         return BookTitle.objects.filter(title__startswith=parameter)
     
     def form_valid(self, form):
-        form.save(form)
+        form.save()
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        self.object_list = self.get_queryset()
+        return super().form_invalid(form)
 
 # def book_title_list_view(request):
 #     qs = BookTitle.objects.all()
