@@ -18,6 +18,11 @@
       {% endif %}
     {% endfor %}
   {% endif %}
+  {% include 'components/header.html' with title="Book titles" description="List of all the book titles available" %}
+  {% for letter in letters %}
+    <a href="{% url 'books:main' letter|lower %}"
+       class="{% if letter == selected_letter|upper %}underline{% endif %}">{{ letter }}</a>
+  {% endfor %}
   <form action="" method="post">
     {% csrf_token %}
     <div class="mb-2">
@@ -42,9 +47,15 @@
   </form>
   {% if qs %}
     <ul>
-      {% for el in qs %}<li>{{ el.title }}</li>{% endfor %}
+      {% for el in qs %}
+        <li>
+          <a href="{{ el.get_absolute_url }}">{{ el.title }}</a>
+        </li>
+      {% endfor %}
     </ul>
   {% else %}
-    <p>No books available.</p>
+    <div>
+      no book titles staring with <b>{{ selected_letter }}</b>
+    </div>
   {% endif %}
 {% endblock %}

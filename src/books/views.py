@@ -6,11 +6,12 @@ from django.views.generic import ListView, FormView
 from . forms import BookTitleForm
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
+import string
 # Create your views here.
 
 class BookTitleListView(FormView, ListView):
     # model = BookTitle
-    queryset = BookTitle.objects.all()
+    # queryset = BookTitle.objects.all()
     template_name = 'books/main.html'
     context_object_name = 'qs'
     form_class = BookTitleForm
@@ -21,8 +22,15 @@ class BookTitleListView(FormView, ListView):
         return self.request.path
 
     def get_queryset(self):
-        parameter = 'w'
+        parameter = self.kwargs.get('letter') if self.kwargs.get('letter') else 'a'
         return BookTitle.objects.filter(title__startswith=parameter)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        letters = list(string.ascii_uppercase)
+        context['letters'] = letters
+        context['selected_letter'] = self.kwargs.get('letter') if self.kwargs.get('letter') else 'a'
+        return context
     
     def form_valid(self, form):
         self.i_instance = form.save()
