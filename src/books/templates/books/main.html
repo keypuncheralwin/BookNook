@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load widget_tweaks %}
+{% block scripts %}
+  <script src="{% static 'books/main.js' %}" defer></script>
+{% endblock scripts %}
 {% block title %}
   Book Title List
 {% endblock title %}

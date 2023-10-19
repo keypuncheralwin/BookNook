@@ -20,6 +20,9 @@
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
           crossorigin="anonymous"
           referrerpolicy="no-referrer" />
+    <script src="{% static 'main.js' %}" defer></script>
+    {% block scripts %}
+    {% endblock scripts %}
     {% tailwind_css %}
   </head>
   <body class="bg-gray-50 dark:bg-slate-800 dark:text-white">
