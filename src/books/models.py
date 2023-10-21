@@ -48,7 +48,22 @@ class Book(models.Model):
 
     def __str__(self) -> str:
         return str(self.title)
+    
+    def get_absolute_url(self):
+        letter = self.title.title[:1].lower()
+        return reverse("books:detail-book", kwargs={"letter": letter, "slug": self.title.slug, "book_id": self.id})
 
+    def delete_object(self):
+        letter = self.title.title[:1].lower()
+        return reverse('books:delete-book', kwargs={'letter':letter, 'slug': self.title.slug, "book_id": self.id})
+
+    @property
+    def is_available(self):
+        if len(self.rental_set.all()) > 0:
+            status = self.rental_set.first().status
+            return True if status == '#1' else False
+        return True
+    
     @property
     def status(self):
         if len(self.rental_set.all()) > 0:
