@@ -5,21 +5,21 @@
     <ul>
         <li class="mb-6 mx-auto">
             <a href="{{ path_to_home }}"
-               class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500">
+               class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500 {% if request.path == path_to_home %}text-slate-100{% endif %}">
                 <i class="fa-solid fa-chart-pie fa-xl"></i>
                 <p>dashboard</p>
             </a>
         </li>
         <li class="mb-6 mx-auto">
             <a href="{{ path_to_books }}"
-               class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500">
+               class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500 {% if 'books' == request.resolver_match.view_name|slice:'0:5' %}text-slate-100{% endif %}">
                 <i class="fa-solid fa-book fa-xl"></i>
                 <p>books</p>
             </a>
         </li>
         <li class="mb-6 mx-auto">
             <a href="{{ path_to_rentals }}"
-               class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500 {% if 'rentals' == request.resolver_match.view_name|slice:'0:7' %}text-white{% endif %}">
+               class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500 {% if 'rentals' == request.resolver_match.view_name|slice:'0:7' %}text-slate-100{% endif %}">
                 <i class="fa-solid fa-bookmark fa-xl"></i>
                 <p>rentals</p>
             </a>
